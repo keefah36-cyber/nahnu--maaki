@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نحن معكِ</title>
+  <style>
+    :root{
+      --bg1:#fff8f6;
+      --bg2:#fffdf9;
+      --card:#ffffff;
+      --accent:#c77d7d;
+      --accent2:#e8b4b8;
+      --text:#5a4545;
+      --soft:#f6eaea;
+      --shadow:0 10px 30px rgba(137, 93, 93, 0.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2));
+      color:var(--text);
+      line-height:1.8;
+    }
+    .container{
+      width:min(1100px, 92%);
+      margin:auto;
+      padding:24px 0 50px;
+    }
+    .hero, .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:28px;
+      margin-top:16px;
+      border:1px solid #f3dfdf;
+    }
+    h1,h2,h3,p{margin-top:0}
+    .title{
+      color:#a35f5f;
+      font-size:clamp(28px, 4vw, 42px);
+      margin-bottom:10px;
+    }
+    .subtitle{
+      font-size:18px;
+      color:#7a6666;
+    }
+    .blessing{
+      background:#fff5f5;
+      border-right:5px solid var(--accent2);
+      padding:14px 16px;
+      border-radius:16px;
+      margin:18px 0;
+      font-size:17px;
+    }
+    .name-box{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      margin-top:18px;
+    }
+    input[type="text"], textarea{
+      width:100%;
+      border:1.5px solid #ead3d3;
+      background:#fffefe;
+      border-radius:16px;
+      padding:15px 16px;
+      font-size:17px;
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      color:var(--text);
+      outline:none;
+    }
+    input[type="text"]:focus, textarea:focus{
+      border-color:#d6a4a4;
+      box-shadow:0 0 0 4px rgba(214,164,164,.13);
+    }
+    button{
+      border:none;
+      border-radius:16px;
+      padding:14px 18px;
+      font-size:16px;
+      cursor:pointer;
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      transition:.2s ease;
+    }
+    .primary{
+      background:linear-gradient(90deg, #d59494, #e7b3b3);
+      color:white;
+      font-weight:bold;
+    }
+    .primary:hover{transform:translateY(-1px)}
+    .ghost{
+      background:#fff4f4;
+      color:#9a6060;
+      border:1px solid #efd7d7;
+    }
+    .section-wrap{
+      display:none;
+      margin-top:26px;
+    }
+    .welcome{
+      padding:22px;
+      margin-bottom:18px;
+      background:linear-gradient(180deg, #fffdfd, #fff6f6);
+      border:1px solid #f2dddd;
+      border-radius:22px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+    .menu-card{
+      padding:18px;
+      background:var(--card);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      border:1px solid #f2e1e1;
+    }
+    .menu-card h3{
+      color:#a56666;
+      margin-bottom:8px;
+    }
+    .menu-card p{
+      color:#7d6666;
+      min-height:60px;
+    }
+    .panel{
+      margin-top:22px;
+      padding:22px;
+      border-radius:22px;
+      background:#fff;
+      box-shadow:var(--shadow);
+      border:1px solid #f2e1e1;
+      display:none;
+    }
+    .open{display:block}
+    .support{
+      background:#fff5f2;
+      border-right:5px solid #edc0bc;
+      border-radius:16px;
+      padding:14px 16px;
+      margin:14px 0 18px;
+      color:#8e6464;
+      font-weight:bold;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:12px 0 16px;
+    }
+    .chip{
+      background:#fff6f6;
+      border:1px solid #eedada;
+      color:#8f6666;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .result-box{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:#fcf6f6;
+      border:1px dashed #e4c5c5;
+      min-height:64px;
+    }
+    .breath-area{
+      display:grid;
+      grid-template-columns: 240px 1fr;
+      gap:22px;
+      align-items:center;
+      margin-top:18px;
+    }
+    .circle-wrap{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:240px;
+    }
+    .breath-circle{
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #fff, #efc6c6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:20px;
+      color:#8d5f5f;
+      font-weight:bold;
+      box-shadow:0 10px 30px rgba(224,173,173,0.3);
+      transform:scale(1);
+      transition:transform 4s linear;
+    }
+    .inhale{transform:scale(1.35)}
+    .hold{transform:scale(1.35)}
+    .exhale{transform:scale(.95)}
+    .small{
+      font-size:14px;
+      color:#8a7373;
+    }
+    .footer-note{
+      margin-top:28px;
+      text-align:center;
+      color:#8c7070;
+      font-size:16px;
+    }
+    .quote{
+      background:#fff8f3;
+      border-radius:18px;
+      padding:15px;
+      border:1px solid #f4ddd1;
+      margin-top:12px;
+    }
+    ul.clean{
+      padding-right:20px;
+      margin:10px 0 0;
+    }
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .mini-card{
+      background:#fff7f7;
+      border:1px solid #efdcdc;
+      border-radius:16px;
+      padding:12px;
+    }
+    @media (max-width: 760px){
+      .name-box{grid-template-columns:1fr}
+      .breath-area{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="title">نحن معكِ 🤍</div>
+      <p class="subtitle">
+        مساحة دافئة للمربية، فيها احتواء وتقدير وكلمات تشبه القلب.
+      </p>
+      <div class="blessing">
+        مع هذه الظروف التي نمر بها جميعًا، نسأل الله أن يعمَّ الأمن والأمان على بلادنا،
+        وأن يملأ قلوبنا سكينة وطمأنينة ولطفًا.
+      </div>
+      <p>
+        اكتبي اسمكِ الكامل، لتظهر لكِ المساحة بكلمات شخصية تحمل اسمكِ في كل زاوية.
+      </p>
+      <div class="name-box">
+        <input id="nameInput" type="text" placeholder="اكتبي اسمكِ الكامل هنا" />
+        <button class="primary" onclick="startJourney()">ابدئي المساحة الدافئة</button>
+      </div>
+      <div class="small" style="margin-top:10px">
+        يمكنكِ تغيير الاسم في أي وقت، وستتغير كل العبارات تلقائيًا.
+      </div>
+    </section>
+
+    <section id="mainSection" class="section-wrap">
+      <div class="welcome">
+        <h2 id="welcomeTitle">مرحبًا بكِ</h2>
+        <p id="welcomeText"></p>
+      </div>
+
+      <div class="grid">
+        <div class="menu-card">
+          <h3>مقدمة خاصة لكِ</h3>
+          <p>رسالة دافئة تراكِ وتقدّر ما قدمتِه في هذه الفترة.</p>
+          <button class="ghost" onclick="openPanel('intro')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>مصدر قوتك</h3>
+          <p>اختاري المصدر الأقرب لكِ الآن، وستظهر لكِ كلمة داعمة خاصة.</p>
+          <button class="ghost" onclick="openPanel('strength')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>ماذا يحتاج قلبكِ الآن؟</h3>
+          <p>هدوء، طاقة، تقدير، كلمة لطيفة، أو تنفيس عميق.</p>
+          <button class="ghost" onclick="openPanel('heart')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>ركن التنفيس</h3>
+          <p>تنفس هادئ، شهيق وزفير، وكلمات تخرج من القلب بصدق.</p>
+          <button class="ghost" onclick="openPanel('release')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>ألعاب وأنشطة دافئة</h3>
+          <p>رسالة اليوم، نجمة ليومكِ، وبطاقة صغيرة تمنحكِ دفئًا.</p>
+          <button class="ghost" onclick="openPanel('games')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>نقاط قوة أراها فيكِ</h3>
+          <p>تذكير رقيق بما يلمعه قلبكِ في الآخرين وفي نفسكِ.</p>
+          <button class="ghost" onclick="openPanel('strengthsSeen')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>تحديات صغيرة لأيام أخف</h3>
+          <p>خطوات بسيطة تخفف الحمل وتعيد بعض الخفة لليوم.</p>
+          <button class="ghost" onclick="openPanel('lighterDays')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>ركن الامتنان</h3>
+          <p>اكتبي ما أنتِ ممتنة له في نهاية يومكِ، ولو كان شيئًا صغيرًا.</p>
+          <button class="ghost" onclick="openPanel('gratitude')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>صدى قلوب من أطفالكِ</h3>
+          <p>رسائل قصيرة تشبه قلوب الأطفال حين تحب وتشتاق.</p>
+          <button class="ghost" onclick="openPanel('echo')">افتحي الركن</button>
+        </div>
+
+        <div class="menu-card">
+          <h3>كلمات من القلب لكِ</h3>
+          <p>خاتمة دافئة باسمكِ، تذكركِ أنكِ لستِ وحدكِ.</p>
+          <button class="ghost" onclick="openPanel('heartWords')">افتحي الركن</button>
+        </div>
+      </div>
+
+      <div id="intro" class="panel"></div>
+      <div id="strength" class="panel"></div>
+      <div id="heart" class="panel"></div>
+      <div id="release" class="panel"></div>
+      <div id="games" class="panel"></div>
+      <div id="strengthsSeen" class="panel"></div>
+      <div id="lighterDays" class="panel"></div>
+      <div id="gratitude" class="panel"></div>
+      <div id="echo" class="panel"></div>
+      <div id="heartWords" class="panel"></div>
+
+      <div class="footer-note">
+        هذه المساحة لكِ يا <span class="live-name">يا غالية</span>، لتتذكري دائمًا أن حضوركِ له أثر، وأن قلبكِ يستحق اللطف.
+      </div>
+    </section>
+  </div>
+
+<script>
+  let currentName = '';
+
+  const supportTexts = {
+    intro: name => `أهلًا بكِ يا ${name} 🌷 هنا مكان صغير وهادئ لكِ، نراكِ في تعبكِ وصبركِ ومحاولاتكِ المستمرة، ونقدّر حضوركِ الجميل مهما اشتدت الأيام.`,
+    strength: name => `يا ${name}، في داخلكِ منابع قوة كثيرة، وبعضها يعمل بصمت. اختاري اليوم المصدر الأقرب لكِ، وتأملي كم ما زال فيكِ من نور وثبات.`,
+    heart: name => `يا ${name}، قلبكِ لا يحتاج الكثير الآن، بل يحتاج أن يُسمَع بلطف. اختاري ما يحتاجه قلبكِ، ودعي الكلمات تصل إليكِ بهدوء.`,
+    release: name => `يا ${name}، هذا الركن لكِ لتخفيف الحمل قليلًا. خذي شهيقًا هادئًا، ثم زفيرًا طويلًا، ودعي ما أثقلكِ يخرج برفق.`,
+    games: name => `يا ${name}، حتى في الأيام الصعبة، تبقى اللمسات الصغيرة قادرة على إعادة شيء من الدفء. اختاري رسالتكِ، فلعلها تأتيكِ في وقتها تمامًا.`,
+    strengthsSeen: name => `يا ${name}، قد تنسين أحيانًا ما فيكِ من جمال حين يثقل اليوم، لذلك هذا الركن يذكركِ ببعض ما يراكِ به الآخرون.`,
+    lighterDays: name => `يا ${name}، لا نبحث هنا عن الكمال، بل عن يوم أخف وقلب أهدأ. اختاري تحديًا صغيرًا، وامنحي نفسكِ خطوة لطيفة فقط.`,
+    gratitude: name => `يا ${name}، الامتنان لا يلغي التعب، لكنه يضيء زاوية صغيرة في اليوم. اكتبي ما أنتِ ممتنة له، ولو كان هدوء دقيقة واحدة.`,
+    echo: name => `يا ${name}، في قلوب الأطفال أثر لا يزول بسهولة. هذه الكلمات الصغيرة تذكركِ أن محبتكِ وصلت، وأن حضوركِ بقي.`,
+    heartWords: name => `يا ${name}، هذه الكلمات لكِ من القلب إلى القلب: أنتِ لستِ وحدكِ، وما تفعلينه له قيمة، حتى حين لا يتكلم أحد عن حجم ما تحملينه.`
+  };
+
+  function getName(){
+    const value = document.getElementById('nameInput').value.trim();
+    return value || 'يا غالية';
+  }
+
+  function applyName(){
+    currentName = getName();
+    document.querySelectorAll('.live-name').forEach(el => el.textContent = currentName);
+    document.getElementById('welcomeTitle').textContent = `مرحبًا بكِ يا ${currentName} 🤍`;
+    document.getElementById('welcomeText').textContent =
+      `هذه المساحة خُلقت لكِ يا ${currentName}، لتتوقفي قليلًا، تتنفسي، وتتذكري أنكِ قمتِ بالكثير في فترة ليست سهلة. هنا ستجدين دعمًا، تنفيسًا، وتقديرًا يحمل اسمكِ أنتِ.`;
+    buildPanels();
+  }
+
+  function startJourney(){
+    applyName();
+    document.getElementById('mainSection').style.display = 'block';
+    window.scrollTo({top: document.getElementById('mainSection').offsetTop - 20, behavior:'smooth'});
+  }
+
+  document.getElementById('nameInput').addEventListener('input', function(){
+    if (document.getElementById('mainSection').style.display === 'block'){
+      applyName();
+    }
+  });
+
+  function openPanel(id){
+    applyName();
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
+    const panel = document.getElementById(id);
+    panel.classList.add('open');
+    panel.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function buildPanels(){
+    const name = currentName;
+
+    document.getElementById('intro').innerHTML = `
+      <h2>مقدمة خاصة لكِ يا ${name}</h2>
+      <div class="support">${supportTexts.intro(name)}</div>
+      <p>
+        مررنا جميعًا بفترة مليئة بالتحديات، ومع ذلك واصلتِ يا ${name} حضوركِ، احتواءكِ، ومحاولاتكِ المستمرة.
+        يكفي أنكِ كنتِ هناك، تحاولين، وتمنحين من قلبكِ ما استطعتِ.
+      </p>
+      <div class="quote">
+        مع هذه الظروف التي نمر بها جميعًا، نسأل الله أن يعمَّ الأمن والأمان على بلادنا،
+        وأن يجعل القادم أخف على القلوب.
+      </div>
+    `;
+
+    document.getElementById('strength').innerHTML = `
+      <h2>مصدر قوتكِ يا ${name}</h2>
+      <div class="support">${supportTexts.strength(name)}</div>
+      <div class="chips">
+        <div class="chip" onclick="showStrength('العقل')">العقل</div>
+        <div class="chip" onclick="showStrength('القيم')">القيم</div>
+        <div class="chip" onclick="showStrength('الدعم الاجتماعي')">الدعم الاجتماعي</div>
+        <div class="chip" onclick="showStrength('المعنى')">المعنى</div>
+        <div class="chip" onclick="showStrength('الخيال')">الخيال</div>
+      </div>
+      <div id="strengthResult" class="result-box">اختاري مصدر القوة لتظهر لكِ كلمة داعمة.</div>
+    `;
+
+    document.getElementById('heart').innerHTML = `
+      <h2>ماذا يحتاج قلبكِ الآن يا ${name}؟</h2>
+      <div class="support">${supportTexts.heart(name)}</div>
+      <div class="chips">
+        <div class="chip" onclick="showHeartNeed('هدوء')">هدوء</div>
+        <div class="chip" onclick="showHeartNeed('طاقة')">طاقة</div>
+        <div class="chip" onclick="showHeartNeed('تقدير')">تقدير</div>
+        <div class="chip" onclick="showHeartNeed('كلمة لطيفة')">كلمة لطيفة</div>
+        <div class="chip" onclick="showHeartNeed('تنفيس عميق')">تنفيس عميق</div>
+      </div>
+      <div id="heartResult" class="result-box">اختاري ما يحتاجه قلبكِ الآن.</div>
+    `;
+
+    document.getElementById('release').innerHTML = `
+      <h2>ركن التنفيس يا ${name}</h2>
+      <div class="support">${supportTexts.release(name)}</div>
+      <div class="breath-area">
+        <div class="circle-wrap">
+          <div id="breathCircle" class="breath-circle">اضغطي<br>ابدئي النفس</div>
+        </div>
+        <div>
+          <button class="primary" onclick="startBreathing()">ابدئي لعبة النفس</button>
+          <p class="small" id="breathGuide" style="margin-top:10px">
+            سنقوم معًا: شهيق 4 ثوانٍ، ثبات 4 ثوانٍ، زفير 6 ثوانٍ.
+          </p>
+          <div class="quote" id="breathMessage">
+            يا ${name}، خذي نفسًا هادئًا الآن... ما لا تستطيعين حمله كله دفعة واحدة، يمكن أن يخف قليلًا مع كل زفير.
+          </div>
+        </div>
+      </div>
+      <textarea id="releaseText" rows="5" placeholder="اكتبي هنا ما تحبين أن يخرج من قلبكِ اليوم..."></textarea>
+    `;
+
+    document.getElementById('games').innerHTML = `
+      <h2>ألعاب وأنشطة دافئة يا ${name}</h2>
+      <div class="support">${supportTexts.games(name)}</div>
+      <div class="chips">
+        <div class="chip" onclick="drawWarmCard('رسالة')">اقشطي رسالتكِ</div>
+        <div class="chip" onclick="drawWarmCard('نجمة')">اختاري نجمة ليومكِ</div>
+        <div class="chip" onclick="drawWarmCard('بطاقة')">بطاقتكِ اليوم</div>
+        <div class="chip" onclick="drawWarmCard('دعم')">رسالة دعم</div>
+      </div>
+      <div id="gamesResult" class="result-box">اضغطي على أحد الأنشطة لتظهر لكِ رسالة دافئة.</div>
+    `;
+
+    document.getElementById('strengthsSeen').innerHTML = `
+      <h2>نقاط قوة أراها فيكِ يا ${name}</h2>
+      <div class="support">${supportTexts.strengthsSeen(name)}</div>
+      <div class="mini-grid">
+        <div class="mini-card">قدرة نافذة على الاحتواء</div>
+        <div class="mini-card">حضور يخفف عن الآخرين</div>
+        <div class="mini-card">شجاعة في المواجهة</div>
+        <div class="mini-card">توازن بين الحزم واللين</div>
+        <div class="mini-card">محاولة مستمرة رغم التعب</div>
+        <div class="mini-card">روح المبادرة</div>
+      </div>
+    `;
+
+    document.getElementById('lighterDays').innerHTML = `
+      <h2>تحديات صغيرة لأيام أخف يا ${name}</h2>
+      <div class="support">${supportTexts.lighterDays(name)}</div>
+      <div class="chips">
+        <div class="chip" onclick="pickChallenge()">اختاري لي تحديًا لطيفًا</div>
+      </div>
+      <div id="challengeResult" class="result-box">اضغطي ليظهر لكِ تحدٍّ صغير لهذا اليوم.</div>
+    `;
+
+    document.getElementById('gratitude').innerHTML = `
+      <h2>ركن الامتنان يا ${name}</h2>
+      <div class="support">${supportTexts.gratitude(name)}</div>
+      <p>أنا ممتنة اليوم لـ...</p>
+      <textarea rows="4" placeholder="اكتبي هنا شيئًا صغيرًا أو كبيرًا تشعرين بالامتنان له..."></textarea>
+      <div class="quote">حتى أصغر لحظة سلام، تستحق أن تُرى وتُشكر.</div>
+    `;
+
+    document.getElementById('echo').innerHTML = `
+      <h2>صدى قلوب من أطفالكِ يا ${name}</h2>
+      <div class="support">${supportTexts.echo(name)}</div>
+      <ul class="clean">
+        <li>لن ننساكِ... أنتِ في القلب دائمًا.</li>
+        <li>وجودكِ معنا كان أمانًا ودفئًا.</li>
+        <li>أحببناكِ كثيرًا يا ${name}.</li>
+        <li>شكراً لحنانكِ وصبركِ وابتسامتكِ.</li>
+      </ul>
+    `;
+
+    document.getElementById('heartWords').innerHTML = `
+      <h2>كلمات من القلب لكِ يا ${name}</h2>
+      <div class="support">${supportTexts.heartWords(name)}</div>
+      <p>
+        يا ${name}، إن تعبتِ فلكِ الحق أن ترتاحي، وإن ضعفتِ فلكِ الحق أن تُسندي قلبكِ بلطف،
+        وإن واصلتِ رغم كل شيء، فهذا بحد ذاته نور كبير.
+      </p>
+      <div class="quote">
+        مع هذه الظروف التي نمر بها جميعًا، نسأل الله أن يعمَّ الأمن والأمان على بلادنا،
+        وأن يحفظ الناس والقلوب والبيوت، ويكتب لنا أيامًا أهدأ وألطف.
+      </div>
+    `;
+  }
+
+  function showStrength(item){
+    const name = currentName;
+    const messages = {
+      'العقل': `يا ${name}، عقلكِ الذي يفكر ويرتب ويبحث عن معنى هو أحد مصادر قوتكِ. حتى عندما تتعبين، يبقى فيكِ وعي يساعدكِ على العبور.`,
+      'القيم': `يا ${name}، قيمكِ هي البوصلة التي تحفظكِ من الداخل. لطفكِ وصدقكِ ورسالتكِ ليست أمورًا عابرة، بل جذور قوة.`,
+      'الدعم الاجتماعي': `يا ${name}، لا بأس أن تستندي أحيانًا إلى من يحبونكِ. في القرب الصادق قوة لا تقل عن قوة التحمل.`,
+      'المعنى': `يا ${name}، حين تتذكرين لماذا بدأتِ، يعود المعنى ليلمس القلب. ما تقدمينه ليس صغيرًا، وأثره لا يضيع.`,
+      'الخيال': `يا ${name}، خيالكِ ليس هروبًا، بل نافذة هواء. فيه مساحة أمل، واتساع، وصورة ليوم أخف وأجمل.`
+    };
+    document.getElementById('strengthResult').textContent = messages[item];
+  }
+
+  function showHeartNeed(item){
+    const name = currentName;
+    const messages = {
+      'هدوء': `يا ${name}، قلبكِ يحتاج قليلًا من الهدوء، لا أكثر. نفس بطيء، صوت أخف، ومساحة لا يُطلب منكِ فيها شيء.`,
+      'طاقة': `يا ${name}، ربما لا تحتاجين معجزة الآن، بل دفعة صغيرة تعيد إليكِ النفس. خطوة واحدة تكفي في هذه اللحظة.`,
+      'تقدير': `يا ${name}، أنتِ تبذلين الكثير، حتى عندما لا يُقال ذلك بصوت عالٍ. ما تفعلينه له قيمة حقيقية ويستحق الامتنان.`,
+      'كلمة لطيفة': `يا ${name}، هذه لكِ: أنتِ طيبة بما يكفي، قوية بما يكفي، وإنسانية جدًا... وهذا جميل وكافٍ.`,
+      'تنفيس عميق': `يا ${name}، خففي عن قلبكِ قليلًا. ليس مطلوبًا منكِ أن تحملي كل شيء بصمت.`
+    };
+    document.getElementById('heartResult').textContent = messages[item];
+  }
+
+  function drawWarmCard(kind){
+    const name = currentName;
+    const cards = {
+      'رسالة': [
+        `يا ${name}، يكفي أنكِ حاولتِ اليوم، وهذا يُحسب لقلبكِ.`,
+        `يا ${name}، حضوركِ يصنع فرقًا حتى في الأيام التي لا تشعرين فيها بذلك.`,
+        `يا ${name}، اللطف الذي تمنحينه يعود إليكِ يومًا بشكل نور.`
+      ],
+      'نجمة': [
+        `نجمة يومكِ اليوم: الهدوء. امنحي نفسكِ وتيرة أبطأ.`,
+        `نجمة يومكِ اليوم: اللطف. تكلمي مع نفسكِ كما تكلمين من تحبين.`,
+        `نجمة يومكِ اليوم: الامتنان. التقطي لحظة صغيرة مضيئة.`
+      ],
+      'بطاقة': [
+        `بطاقتكِ اليوم يا ${name}: من حقكِ أن ترتاحي.`,
+        `بطاقتكِ اليوم يا ${name}: ما زال فيكِ متسع جميل للنهوض برفق.`,
+        `بطاقتكِ اليوم يا ${name}: أنتِ أقوى مما يهمس به تعبكِ الآن.`
+      ],
+      'دعم': [
+        `يا ${name}، نحن معكِ... ونراكِ بقلب ممتن.`,
+        `يا ${name}، لا أحد يمر بكل هذا ويبقى كما هو، ومع ذلك ما زلتِ تمنحين من قلبكِ.`,
+        `يا ${name}، فيكِ من الثبات أكثر مما تتخيلين.`
+      ]
+    };
+    const arr = cards[kind];
+    const choice = arr[Math.floor(Math.random() * arr.length)];
+    document.getElementById('gamesResult').textContent = choice;
+  }
+
+  function pickChallenge(){
+    const name = currentName;
+    const list = [
+      `يا ${name}، خذي استراحة لخمس دقائق دون أي شعور بالذنب.`,
+      `يا ${name}، خذي دقيقة صمت الآن، فقط أنتِ وأنفاسكِ.`,
+      `يا ${name}، سامحي نفسكِ على تقصير بسيط حدث هذا الأسبوع.`,
+      `يا ${name}، تذكري موقفًا لطيفًا مع طفل أو طاقم أو أهل وابتسمي له.`,
+      `يا ${name}، اكتبي شيئًا واحدًا تحبينه في نفسكِ.`
+    ];
+    document.getElementById('challengeResult').textContent =
+      list[Math.floor(Math.random() * list.length)];
+  }
+
+  let breathingInterval = null;
+  function startBreathing(){
+    const circle = document.getElementById('breathCircle');
+    const guide = document.getElementById('breathGuide');
+    const msg = document.getElementById('breathMessage');
+    const name = currentName;
+
+    if (breathingInterval) clearInterval(breathingInterval);
+
+    const phases = [
+      {label:'شهيق', cls:'inhale', duration:4000, text:`خذي شهيقًا هادئًا يا ${name}... أدخلي الهواء بلطف.`},
+      {label:'ثبات', cls:'hold', duration:4000, text:`احتفظي بالنفس قليلًا... أنتِ بأمان في هذه اللحظة.`},
+      {label:'زفير', cls:'exhale', duration:6000, text:`أخرجي الزفير ببطء... دعي بعض الثقل يرحل مع الهواء.`}
+    ];
+
+    let i = 0;
+    function runPhase(){
+      const phase = phases[i];
+      circle.className = 'breath-circle ' + phase.cls;
+      circle.innerHTML = phase.label;
+      guide.textContent = `${phase.label} لمدة ${phase.duration/1000} ثوانٍ`;
+      msg.textContent = phase.text;
+      setTimeout(() => {
+        i = (i + 1) % phases.length;
+        runPhase();
+      }, phase.duration);
+    }
+    runPhase();
+  }
+</script>
+</body>
+</html>
