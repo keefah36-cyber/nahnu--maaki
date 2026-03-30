@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نحن معكِ</title>
+
+<style>
+body{font-family:Arial;background:#fff8f6;text-align:center;padding:20px;}
+.title{font-size:32px;color:#a35f5f;}
+.logo{width:120px;margin:10px auto;}
+.words{color:#8a6d6d;font-weight:bold;margin-bottom:20px;}
+button{padding:10px;margin:5px;border:none;border-radius:10px;background:#d59494;color:white;}
+.section{display:none;margin-top:20px;background:white;padding:15px;border-radius:15px;}
+textarea{width:90%;height:80px;}
+</style>
+</head>
+
+<body>
+
+<div id="start">
+<div class="title">نحن معكِ 🤍</div>
+<img src="logo.jpeg" class="logo">
+<div class="words">قيادة • مسؤولية • مشاركة</div>
+
+<input id="name" placeholder="اكتبي اسمكِ" style="padding:10px;width:80%;">
+<br>
+<button onclick="start()">ابدئي</button>
+</div>
+
+<div id="main" style="display:none;">
+<h3 id="welcome"></h3>
+
+<button onclick="openSection('strength')">مصادر قوتك</button>
+<button onclick="openSection('heart')">ماذا يحتاج قلبك الآن؟</button>
+<button onclick="openSection('release')">ركن التنفيس</button>
+<button onclick="openSection('message')">رسالة لكِ 💌</button>
+<button onclick="openSection('strengths')">نقاط القوة</button>
+<button onclick="openSection('light')">كيف أخفف عن نفسي اليوم؟</button>
+<button onclick="openSection('gratitude')">أنا ممتنة لنفسي</button>
+<button onclick="openSection('words')">كلمات من القلب</button>
+</div>
+
+<div id="strength" class="section"></div>
+<div id="heart" class="section"></div>
+<div id="release" class="section"></div>
+<div id="message" class="section"></div>
+<div id="strengths" class="section"></div>
+<div id="light" class="section"></div>
+<div id="gratitude" class="section"></div>
+<div id="words" class="section"></div>
+
+<script>
+let name="";
+
+function start(){
+ name=document.getElementById("name").value||"يا غالية";
+ document.getElementById("start").style.display="none";
+ document.getElementById("main").style.display="block";
+ document.getElementById("welcome").innerHTML="مرحبًا يا "+name+" 🤍";
+ build();
+}
+
+function openSection(id){
+ document.querySelectorAll('.section').forEach(s=>s.style.display="none");
+ document.getElementById(id).style.display="block";
+}
+
+function back(){
+ document.querySelectorAll('.section').forEach(s=>s.style.display="none");
+}
+
+function build(){
+
+document.getElementById("strength").innerHTML=
+"<h3>مصادر قوتك</h3><p>يا "+name+" 🤍 في داخلك قوة</p><button onclick='back()'>رجوع</button>";
+
+document.getElementById("heart").innerHTML=
+"<h3>ماذا يحتاج قلبك الآن؟</h3><p>يا "+name+" 🤍 توقفي واسمعي قلبك</p><button onclick='back()'>رجوع</button>";
+
+document.getElementById("release").innerHTML=
+"<h3>ركن التنفيس</h3><p>خذي نفس عميق يا "+name+"</p><textarea></textarea><br><button onclick='back()'>رجوع</button>";
+
+document.getElementById("message").innerHTML=
+"<h3>رسالة لكِ 💌</h3><p>يا "+name+" أنتِ قوية</p><button onclick='back()'>رجوع</button>";
+
+document.getElementById("strengths").innerHTML=
+"<h3>نقاط القوة</h3><p>💗 احتواء</p><p>✨ مبادرة</p><button onclick='back()'>رجوع</button>";
+
+document.getElementById("light").innerHTML=
+"<h3>كيف أخفف عن نفسي اليوم؟</h3><p>خذي استراحة</p><button onclick='back()'>رجوع</button>";
+
+document.getElementById("gratitude").innerHTML=
+"<h3>أنا ممتنة لنفسي</h3><p>أنا ممتنة لنهاية اليوم بسلام</p><button onclick='back()'>رجوع</button>";
+
+document.getElementById("words").innerHTML=
+"<h3>كلمات من القلب</h3><button onclick='alert("رسالة المفتشة يا "+name+"")'>رسالة المفتشة</button><button onclick='alert("رسالة الطاقم يا "+name+"")'>رسالة الطاقم</button><br><button onclick='back()'>رجوع</button>";
+
+}
+</script>
+
+</body>
+</html>
